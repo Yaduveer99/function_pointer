@@ -1,0 +1,32 @@
+This is a use case of function pointer to use a C library module into a cpp code.
+
+By using function pointer we can make use of functions availbale in our C module and make a call to them in our cpp module.
+
+in this example setup following things are included:
+
+first.h and first.c files are my C module.
+
+second.h and second.cpp files make my CPP module.
+
+If one want to use "sum" function which is defined in C module files.
+So One will compile the C module files into a static library after adding the function pointer and initializer function.
+ 
+this concept use case can very well be enhanced to user defined data types as well as more functions can be included
+
+For example, to compile c files and create thie output files:
+
+gcc -c -o first.o first.c
+gcc -c -o main.o main.c
+
+Now link the object files into a static library as follows:
+
+ar ru libfirst.a first.o main.o
+ranlib libfirst.a
+
+
+Now compile the cpp files using this static lib mentioned above:
+
+g++ second/second.cpp -L/home/yaduveer/github/function_pointer -lfirst -o second/second
+
+Run the executable:
+./second
